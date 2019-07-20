@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Ludo Board</title>
+		<style>
+			#base{
+				border: 5px #000 solid;
+				background: #f4f4f4;
+			}
+			
+		</style>
+	</head>
+	<body>
+		<canvas id="base" height="1000" width="1000"></canvas>
+		<script>
+			var c=document.getElementById('base');
+			var ctx = c.getContext('2d');
+			//red-player-home
+			ctx.fillStyle='red';
+			ctx.fillRect(0,0,350,350);
+			//blue-player-home
+			ctx.fillStyle='blue';
+			ctx.fillRect(0,650,350,350);
+			//green-player-green
+			ctx.fillStyle='green'
+			ctx.fillRect(650,0,350,350);
+			//yellow-player-home
+			ctx.fillStyle='yellow';
+			ctx.fillRect(650,650,350,350);
+			//track
+			ctx.fillStyle='orange';
+			//red-home-strips
+			//vertical
+			ctx.fillRect(350,0,75,450);
+			//horizontal
+			ctx.fillRect(0,350,450,75);
+
+			//blue-home-strips
+			//horizontal
+			ctx.fillRect(0,575,450,75);
+			//vertical
+			ctx.fillRect(350,550,75,450);
+
+			//green-home-strips
+			//vertical
+			ctx.fillRect(575,0,75,450);
+			//horizontal
+			ctx.fillRect(550,350,450,75);
+
+			//yellow-home-strips
+			//horizontal
+			ctx.fillRect(550,575,450,75);
+			//vertical
+			ctx.fillRect(575,550,75,450);
+
+			//red-blue connect
+			//vertical
+			ctx.fillRect(0,425,75,150);
+
+			//red-green connect horizontal
+			ctx.fillRect(425,0,150,75);
+
+			//green-yellow connect vertical
+			ctx.fillRect(925,425,75,150);
+
+			//blue-yellow connect horizontal
+			ctx.fillRect(425,925,150,75);
+
+		
+			//victory-track
+			ctx.fillStyle='white';
+			//left-horizontal
+			ctx.fillRect(75,425,275,150);
+			//top-vertical
+			ctx.fillRect(425,75,150,275);
+			//right-horizontal
+			ctx.fillRect(650,425,275,150);
+			//bottom-vertical
+			ctx.fillRect(425,650,150,275);
+			//vertical-strip
+			ctx.fillRect(450,275,100,450);
+			//horizontal-strip
+			ctx.fillRect(275,450,450,100);
+			//center-square
+			ctx.fillRect(425,425,150,150);
+
+			//circle -red 1
+			ctx.beginPath();
+			ctx.arc(100,100,50,0,2*Math.PI);
+			//red circle 4
+			ctx.arc(250,250,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//red-circle 2
+			ctx.beginPath();
+			ctx.arc(250,100,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//red circle 3
+			ctx.beginPath();
+			ctx.arc(100,250,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+
+			//green circle 1
+			ctx.beginPath();
+			ctx.arc(750,100,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//green circle 2
+			ctx.beginPath();
+			ctx.arc(900,100,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//green circle 3
+			ctx.beginPath();
+			ctx.arc(750,250,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//green circle 4
+			ctx.beginPath();
+			ctx.arc(900,250,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//blue circle 1
+			ctx.beginPath();
+			ctx.arc(100,750,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//blue circle 2
+			ctx.beginPath();
+			ctx.arc(250,750,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//blue circle 3
+			ctx.beginPath();
+			ctx.arc(100,900,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//blue circle 4
+			ctx.beginPath();
+			ctx.arc(250,900,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//yellow circle 1
+			ctx.beginPath();
+			ctx.arc(750,750,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//yellow circle 2
+			ctx.beginPath();
+			ctx.arc(900,750,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//yellow circle 1
+			ctx.beginPath();
+			ctx.arc(750,900,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//yellow circle 1
+			ctx.beginPath();
+			ctx.arc(900,900,50,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			//travel path vertical red-blue connect
+			ctx.beginPath();
+			ctx.arc(37.5,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+			
+			ctx.beginPath();
+			ctx.arc(37.5,475,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+			
+			ctx.beginPath();
+			ctx.arc(37.5,562.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(125,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='red';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(212.5,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(300,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,300,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,212.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,125,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,37.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(475,37.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(562.5,37.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,125,30,0,2*Math.PI);
+			ctx.fillStyle='green';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,212.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,300,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+		
+			ctx.beginPath();
+			ctx.arc(702.5,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(790,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(877.5,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(965,387.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(965,475,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(965,562.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(877.5,615,30,0,2*Math.PI);
+			ctx.fillStyle='yellow';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(790,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(702.5,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,702.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,790,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,877.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(615,965,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(527.5,965,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(440,965,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,877.5,30,0,2*Math.PI);
+			ctx.fillStyle='blue';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,790,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,702.5,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(387.5,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(300,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(212.5,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();		
+
+			ctx.beginPath();
+			ctx.arc(125,615,30,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.fillStyle='red';
+			ctx.fillRect(75,450,350,100);
+
+			ctx.fillStyle='green';
+			ctx.fillRect(450,75,100,350);
+
+			ctx.fillStyle='blue';
+			ctx.fillRect(450,575,100,350);
+
+			ctx.fillStyle='yellow';
+			ctx.fillRect(575,450,350,100);
+
+			ctx.beginPath();
+			ctx.arc(125,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(125,500,35,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(215,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(305,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(695,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(785,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();	
+
+			ctx.beginPath();
+			ctx.arc(875,500,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,500,60,0,2*Math.PI);
+			ctx.fillStyle='black';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,300,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,210,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,120,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,700,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,790,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+
+			ctx.beginPath();
+			ctx.arc(500,880,40,0,2*Math.PI);
+			ctx.fillStyle='white';
+			ctx.fill();
+		</script>
+	</body>
+</html>
